@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://sefaxmsc8inc"]
+
+[ext_resource type="Texture2D" uid="uid://dal74do3uowjb" path="res://blue.png" id="1_dfcni"]
+[ext_resource type="Script" uid="uid://b7f1eioquatph" path="res://level.gd" id="1_kogrj"]
+[ext_resource type="PackedScene" uid="uid://dplophp61t7pb" path="res://player.tscn" id="2_nm31b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atqsn"]
+size = Vector2(1282, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kogrj"]
+size = Vector2(1280, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm31b"]
+size = Vector2(20, 762)
+
+[node name="Level" type="Node2D" unique_id=1487291890]
+script = ExtResource("1_kogrj")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=456760653]
+position = Vector2(642.00006, 379.00003)
+scale = Vector2(5.007813, 2.9902341)
+texture = ExtResource("1_dfcni")
+
+[node name="Player" parent="." unique_id=1104864356 instance=ExtResource("2_nm31b")]
+position = Vector2(282, 373)
+
+[node name="Borders" type="Node2D" parent="." unique_id=1183671934]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=1758497749]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=217192482]
+position = Vector2(642, 0)
+shape = SubResource("RectangleShape2D_atqsn")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" unique_id=1194906621]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2" unique_id=753518713]
+position = Vector2(641, 737.5)
+shape = SubResource("RectangleShape2D_kogrj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders" unique_id=1509321770]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3" unique_id=1648519231]
+position = Vector2(10, 380)
+shape = SubResource("RectangleShape2D_nm31b")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders" unique_id=296157753]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4" unique_id=1392054432]
+position = Vector2(1273, 375)
+shape = SubResource("RectangleShape2D_nm31b")
+
+[node name="MeteorTimer" type="Timer" parent="." unique_id=532977705]
+wait_time = 0.25
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="." unique_id=2131437349]
+
+[node name="Lasers" type="Node2D" parent="." unique_id=1916307988]
+
+[connection signal="laser" from="Player" to="." method="_on_player_laser"]
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
